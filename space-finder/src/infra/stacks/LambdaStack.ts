@@ -31,7 +31,11 @@ export class LambdaStack extends cdk.Stack {
       effect: Effect.ALLOW,
       resources: [props.spacesTable.tableArn],
       actions: [
-        'dynamodb:PutItem'
+        'dynamodb:PutItem',
+        'dynamodb:Scan',
+        'dynamodb:GetItem',
+        'dynamodb:UpdateItem',
+        'dynamodb:DeleteItem',
       ]
     }))
 
