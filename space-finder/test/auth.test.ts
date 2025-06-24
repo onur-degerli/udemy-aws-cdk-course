@@ -7,7 +7,7 @@ async function testAuth() {
   const idToken = await service.getIdToken();
   // console.log(idToken);
   const credentials = await service.generateTemporaryCredentials();
-  // console.log(credentials);
+  console.log(credentials);
   const buckets = await listBuckets(credentials);
   console.log(buckets);
 }
