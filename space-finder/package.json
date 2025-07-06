@@ -1,36 +1,42 @@
 {
   "name": "space-finder",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dry-run": "cdk synth",
-    "deploy": "cdk deploy --all --outputs-file outputs.json"
+    "test-services": "jest --config jest.services.config.ts",
+    "test-infra": "jest --config jest.infra.config.ts",
+    "test": "npm run test-services && npm run test-infra",
+    "deploy": "cdk deploy --all --outputs-file outputs.json --require-approval never",
+    "dry-run": "cdk synth"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@types/aws-lambda": "^8.10.149",
-    "@types/node": "^22.15.29",
-    "aws-cdk": "^2.1020.2",
-    "aws-cdk-lib": "^2.199.0",
-    "constructs": "^10.4.2",
-    "esbuild": "^0.25.5",
+  "devDependencies": {   
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^22.7.4",
+    "aws-cdk": "^2.161.1",
+    "aws-cdk-lib": "^2.161.1",
+    "constructs": "^10.3.0",
+    "esbuild": "^0.24.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.6.2"
   },
   "dependencies": {
-    "@aws-amplify/auth": "^6.13.1",
-    "@aws-sdk/client-cognito-identity": "^3.835.0",
-    "@aws-sdk/client-dynamodb": "^3.821.0",
-    "@aws-sdk/client-s3": "^3.821.0",
-    "@aws-sdk/credential-providers": "^3.835.0",
-    "@aws-sdk/lib-dynamodb": "^3.828.0",
-    "@aws-sdk/util-dynamodb": "^3.828.0",
+    "@aws-amplify/auth": "^6.5.1",
+    "@aws-sdk/client-cognito-identity": "^3.665.0",
+    "@aws-sdk/client-dynamodb": "^3.665.0",
+    "@aws-sdk/client-s3": "^3.665.0",
+    "@aws-sdk/credential-providers": "^3.665.0",
+    "@aws-sdk/lib-dynamodb": "^3.665.0",
+    "@aws-sdk/util-dynamodb": "^3.665.0",
+    "@types/jest": "^29.5.13",
     "@types/uuid": "^10.0.0",
-    "aws-amplify": "^6.15.1",
-    "uuid": "^11.1.0"
+    "aws-amplify": "^6.6.4",
+    "aws-xray-sdk-core": "^3.10.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "uuid": "^10.0.0"
   }
 }
