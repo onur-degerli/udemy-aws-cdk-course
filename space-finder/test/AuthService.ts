@@ -1,16 +1,17 @@
 import { Amplify } from "aws-amplify";
-import { SignInOutput, fetchAuthSession, signIn } from '@aws-amplify/auth';
+import { SignInOutput, confirmSignIn, fetchAuthSession, signIn } from '@aws-amplify/auth';
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
+import { AuthStack } from '../outputs.json';
 
 const awsRegion = 'eu-north-1';
 
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: 'eu-north-1_LvYw226La',
-      userPoolClientId: '5suef91kcmbgudt7ssa6s0lnr1',
-      identityPoolId: 'eu-north-1:be8f69f2-02b9-4702-adce-a4a05ac6819c'
+      userPoolId: AuthStack.SpaceUserPoolId,
+      userPoolClientId: AuthStack.SpaceUserPoolClientId,
+      identityPoolId: AuthStack.SpaceIdentityPoolId,
     }
   }
 });
@@ -25,6 +26,12 @@ export class AuthService {
       }
     });
 
+    if (signInOutput.nextStep.signInStep === "CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED") {
+      await confirmSignIn({
+        challengeResponse: password,
+      });
+    }
+
     return signInOutput;
   }
 
@@ -38,7 +45,7 @@ export class AuthService {
     const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/eu-north-1_LvYw226La`;
     const cognitoIdentity = new CognitoIdentityClient({
       credentials: fromCognitoIdentityPool({
-        identityPoolId: 'eu-north-1:be8f69f2-02b9-4702-adce-a4a05ac6819c',
+        identityPoolId: AuthStack.SpaceIdentityPoolId,
         logins: {
           [cognitoIdentityPool]: idToken,
         }

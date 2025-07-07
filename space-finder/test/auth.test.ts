@@ -3,9 +3,9 @@ import { AuthService } from "./AuthService";
 
 async function testAuth() {
   const service = new AuthService();
-  const loginResult = await service.login('onurdegerli', 'nM58AdtgRa7RGN8)');
+  const loginResult = await service.login('onurdegerli@gmail.com', 'petdig-nIrsu7-fudpeb');
   const idToken = await service.getIdToken();
-  // console.log(idToken);
+  console.log(idToken);
   const credentials = await service.generateTemporaryCredentials();
   console.log(credentials);
   const buckets = await listBuckets(credentials);
