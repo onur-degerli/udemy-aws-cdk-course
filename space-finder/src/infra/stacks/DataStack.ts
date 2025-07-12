@@ -41,7 +41,7 @@ export class DataStack extends cdk.Stack {
       value: this.photosBucket.bucketName
     });
 
-    this.spacesTable = new Table(this, 'SpacesTable', {
+  this.spacesTable = new Table(this, 'SpacesTable', {
       partitionKey: {
         name: 'id',
         type: AttributeType.STRING,

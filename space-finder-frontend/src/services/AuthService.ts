@@ -63,7 +63,6 @@ export class AuthService {
       this.userName = userName;
       this.jwtToken = await this.getIdToken();
 
-      console.log('jwt token', this.jwtToken)
       return this.user;
     } catch (error) {
       console.error(error);

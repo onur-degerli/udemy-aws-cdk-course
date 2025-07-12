@@ -42,7 +42,7 @@ export class AuthService {
 
   public async generateTemporaryCredentials() {
     const idToken = await this.getIdToken();
-    const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/eu-north-1_LvYw226La`;
+    const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthStack.SpaceUserPoolId}`;
     const cognitoIdentity = new CognitoIdentityClient({
       credentials: fromCognitoIdentityPool({
         identityPoolId: AuthStack.SpaceIdentityPoolId,

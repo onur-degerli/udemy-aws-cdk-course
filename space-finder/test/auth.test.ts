@@ -1,9 +1,11 @@
 import { ListBucketsCommand, S3Client } from "@aws-sdk/client-s3";
 import { AuthService } from "./AuthService";
+import { config } from 'dotenv';
+config();
 
 async function testAuth() {
   const service = new AuthService();
-  const loginResult = await service.login('onurdegerli@gmail.com', 'petdig-nIrsu7-fudpeb');
+  const loginResult = await service.login(process.env.SPACE_USER_NAME, process.env.SPACE_PASSWORD);
   const idToken = await service.getIdToken();
   console.log(idToken);
   const credentials = await service.generateTemporaryCredentials();
