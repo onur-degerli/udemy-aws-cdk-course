@@ -7,6 +7,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,md}'",
     "cdk": "cdk",
     "cdk-personal": "AWS_PROFILE=personal AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws-personal/credentials AWS_CONFIG_FILE=$HOME/.aws-personal/config cdk",
     "deploy-personal": "AWS_PROFILE=personal AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws-personal/credentials AWS_CONFIG_FILE=$HOME/.aws-personal/config cdk deploy --all --outputs-file outputs.json",
@@ -25,6 +26,7 @@
     "aws-cdk-lib": "^2.161.1",
     "constructs": "^10.3.0",
     "esbuild": "^0.24.0",
+    "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },
@@ -36,13 +38,13 @@
     "@aws-sdk/credential-providers": "^3.665.0",
     "@aws-sdk/lib-dynamodb": "^3.665.0",
     "@aws-sdk/util-dynamodb": "^3.665.0",
-    "@types/jest": "^29.5.13",
+    "@types/jest": "^29.5.14",
     "@types/uuid": "^10.0.0",
     "aws-amplify": "^6.6.4",
     "aws-xray-sdk-core": "^3.10.3",
     "dotenv": "^17.2.0",
     "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.4.0",
     "uuid": "^10.0.0"
   }
 }

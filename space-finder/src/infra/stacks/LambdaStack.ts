@@ -8,11 +8,10 @@ import { Construct } from 'constructs';
 import { join } from 'path';
 
 interface LambdaStackProps extends cdk.StackProps {
-  spacesTable: ITable,
+  spacesTable: ITable;
 }
 
 export class LambdaStack extends cdk.Stack {
-
   public readonly spacesLambdaIntegration: LambdaIntegration;
 
   constructor(scope: Construct, id: string, props?: LambdaStackProps) {
@@ -23,23 +22,25 @@ export class LambdaStack extends cdk.Stack {
       handler: 'handler',
       entry: join(__dirname, '..', '..', 'services', 'spaces', 'handler.ts'),
       environment: {
-        TABLE_NAME: props.spacesTable.tableName
+        TABLE_NAME: props.spacesTable.tableName,
       },
       tracing: Tracing.ACTIVE,
-      timeout: cdk.Duration.minutes(1)
+      timeout: cdk.Duration.minutes(1),
     });
 
-    spacesLambda.addToRolePolicy(new PolicyStatement({
-      effect: Effect.ALLOW,
-      resources: [props.spacesTable.tableArn],
-      actions: [
-        'dynamodb:PutItem',
-        'dynamodb:Scan',
-        'dynamodb:GetItem',
-        'dynamodb:UpdateItem',
-        'dynamodb:DeleteItem',
-      ]
-    }))
+    spacesLambda.addToRolePolicy(
+      new PolicyStatement({
+        effect: Effect.ALLOW,
+        resources: [props.spacesTable.tableArn],
+        actions: [
+          'dynamodb:PutItem',
+          'dynamodb:Scan',
+          'dynamodb:GetItem',
+          'dynamodb:UpdateItem',
+          'dynamodb:DeleteItem',
+        ],
+      })
+    );
 
     this.spacesLambdaIntegration = new LambdaIntegration(spacesLambda);
   }
