@@ -8,17 +8,26 @@
       "type": "node",
       "request": "launch",
       "name": "Debug local file",
-      "runtimeArgs": [
-        "-r",
-        "ts-node/register"
-      ],
-      "args": [
-        "${relativeFile}"
-      ],
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "args": ["${relativeFile}"],
       "env": {
         "AWS_REGION": "eu-north-1",
         "TABLE_NAME": "SpaceStack-0a39509a9a59"
       }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jest Current File",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": [
+        "--runTestsByPath",
+        "${relativeFile}",
+        "--config",
+        "jest.config.ts"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
