@@ -1,6 +1,15 @@
 import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
 import { handler } from '../../../src/services/spaces/handler';
 
+jest.mock('aws-xray-sdk-core', () => ({
+  captureAWSv3Client: (client: any) => client,
+  getSegment: jest.fn(() => ({
+    addNewSubsegment: jest.fn().mockReturnValue({
+      close: jest.fn(),
+    }),
+  })),
+}));
+
 const someItems = [
   {
     id: {

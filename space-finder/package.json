@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
+    "test-services": "jest --config jest.services.config.ts",
+    "test-infra": "jest --config jest.infra.config.ts",
+    "test": "npm run test-services && npm run test-infra",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,md}'",
     "cdk": "cdk",
     "cdk-personal": "AWS_PROFILE=personal AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws-personal/credentials AWS_CONFIG_FILE=$HOME/.aws-personal/config cdk",
